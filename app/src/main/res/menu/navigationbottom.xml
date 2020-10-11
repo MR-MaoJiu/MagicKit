@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="魔法盒"
+        android:icon="@drawable/mfb"
+        ></item>
+    <item
+        android:title="实验室"
+        android:icon="@drawable/sys"
+        ></item>
+    <item
+        android:title="个人中心"
+        android:icon="@drawable/me"
+        ></item>
+</menu>

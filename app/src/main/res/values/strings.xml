@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">魔法盒</string>
+    <string name="Charge">充电中</string>
+    <string name="notCharge">充电断开</string>
+    <string name="full">充电完毕</string>
+</resources>
