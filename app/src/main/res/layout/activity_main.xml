@@ -10,18 +10,45 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By:猫九先森 Email:481869314@qq.com"
+        android:textColor="#19DABC"
+        android:text="By:猫九先森 QQ:481869314"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="检查更新"
+        android:textColor="#2792E4"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/shape"
+        android:textColor="#ffff"
+        android:text="请猫九先森喝杯咖啡"
+        app:layout_constraintBottom_toTopOf="@+id/tv_v"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message" />
+
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-507dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -99,6 +126,7 @@
                 android:gravity="center"
                 android:text="在线影院" />
         </LinearLayout>
+
     </LinearLayout>
 
 

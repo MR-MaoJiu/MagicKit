@@ -1,0 +1,9 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_update"
+        android:title="更新"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+</menu>
