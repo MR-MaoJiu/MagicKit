@@ -66,14 +66,14 @@ MyBroadcastReceiver receiver;
         }
     }
 //    private MyBroadcastReceiver mbatteryReceiver;
-   // SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//         sharedPreferences=getSharedPreferences("videowallpath",MODE_PRIVATE);
+         sharedPreferences=getSharedPreferences("AudioSetting",MODE_PRIVATE);
 ////        String url= sharedPreferences.getString("path","");
 //        if(!url.isEmpty())
 //        {
@@ -92,6 +92,13 @@ MyBroadcastReceiver receiver;
         recevierFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         recevierFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         receiver=new MyBroadcastReceiver();
+        receiver.isPlayBatteryAudio=sharedPreferences.getBoolean("battery",true);
+        receiver.isPlayScreenAudio=sharedPreferences.getBoolean("screen",true);
+        receiver.chargingPath=sharedPreferences.getString("charging","");
+        receiver.dischargingPath=sharedPreferences.getString("discharging","");
+        receiver.fullPath=sharedPreferences.getString("full","");
+        receiver.openScreenPath=sharedPreferences.getString("open","");
+        receiver.closeScreenPath=sharedPreferences.getString("close","");
         registerReceiver(receiver, recevierFilter);
         ImageButton btn= (ImageButton) findViewById(R.id.cd);
         ImageButton btn2= (ImageButton) findViewById(R.id.bz);
@@ -114,7 +121,8 @@ MyBroadcastReceiver receiver;
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent it=new Intent(MainActivity.this,AudioSetting.class);
+                startActivity(it);
             }
         });
     }
