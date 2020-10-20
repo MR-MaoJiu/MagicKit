@@ -186,6 +186,7 @@ MyBroadcastReceiver receiver;
         ImageButton btn= (ImageButton) findViewById(R.id.cd);
         ImageButton btn2= (ImageButton) findViewById(R.id.bz);
         ImageButton btn3= (ImageButton) findViewById(R.id.sp);
+        ImageButton btn4= (ImageButton) findViewById(R.id.chat);
         TextView tv=findViewById(R.id.tv_v);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +208,14 @@ MyBroadcastReceiver receiver;
             startActivity(it);
             }
         });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(MainActivity.this,Chat.class);
+                startActivity(it);
+            }
+        });
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

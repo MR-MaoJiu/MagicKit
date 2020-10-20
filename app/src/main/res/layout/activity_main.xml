@@ -126,6 +126,31 @@
                 android:gravity="center"
                 android:text="在线影院" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageButton
+                android:id="@+id/chat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_ripple"
+                android:scaleType="centerInside"
+                android:src="@mipmap/chat"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textViewChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="在线聊天" />
+        </LinearLayout>
 
     </LinearLayout>
 

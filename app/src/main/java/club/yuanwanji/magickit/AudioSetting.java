@@ -15,9 +15,12 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import java.util.List;
+
 public class AudioSetting extends AppCompatActivity  implements View.OnClickListener{
     SharedPreferences sharedPreferences;
     Switch switch_screen, switch_battery;
+   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class AudioSetting extends AppCompatActivity  implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         switch(v.getId()) {
             case R.id.button2:
