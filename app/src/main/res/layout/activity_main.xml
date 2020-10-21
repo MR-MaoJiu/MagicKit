@@ -44,112 +44,154 @@
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-507dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/cd"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/button_ripple"
-                android:scaleType="centerInside"
-                android:src="@mipmap/cd"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="音频设置" />
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageButton
+                    android:id="@+id/sp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_ripple"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/sp"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="在线影院" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageButton
+                    android:id="@+id/bz"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_ripple"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/bz"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="视频壁纸" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageButton
+                    android:id="@+id/cd"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_ripple"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/cd"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="音频设置" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageButton
+                    android:id="@+id/chat"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_ripple"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/chat"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textViewChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="在线聊天" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/bz"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/button_ripple"
-                android:scaleType="centerInside"
-                android:src="@mipmap/bz"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/textView"
+            <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="视频壁纸" />
-        </LinearLayout>
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+                <ImageButton
+                    android:id="@+id/ptc"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_ripple"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ptc"
+                    tools:ignore="MissingConstraints" />
 
-            <ImageButton
-                android:id="@+id/sp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/button_ripple"
-                android:scaleType="centerInside"
-                android:src="@mipmap/sp"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="在线影院" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linearLayout6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
-
-            <ImageButton
-                android:id="@+id/chat"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/button_ripple"
-                android:scaleType="centerInside"
-                android:src="@mipmap/chat"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/textViewChat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="在线聊天" />
+                <TextView
+                    android:id="@+id/textViewPTC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="图片转素描" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

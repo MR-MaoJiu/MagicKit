@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -22,6 +23,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.Observable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -33,9 +36,11 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +53,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,6 +62,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
     TextView myText;
@@ -118,7 +125,9 @@ MyBroadcastReceiver receiver;
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
          sharedPreferences=getSharedPreferences("AudioSetting",MODE_PRIVATE);
+
 ////        String url= sharedPreferences.getString("path","");
 //        if(!url.isEmpty())
 //        {
@@ -127,6 +136,7 @@ MyBroadcastReceiver receiver;
         verifyStoragePermissions(MainActivity.this);
         mContext=this;
         Update();
+
         myText=(TextView)findViewById(R.id.message);
         myText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +197,7 @@ MyBroadcastReceiver receiver;
         ImageButton btn2= (ImageButton) findViewById(R.id.bz);
         ImageButton btn3= (ImageButton) findViewById(R.id.sp);
         ImageButton btn4= (ImageButton) findViewById(R.id.chat);
+        ImageButton btn5= (ImageButton) findViewById(R.id.ptc);
         TextView tv=findViewById(R.id.tv_v);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +226,14 @@ MyBroadcastReceiver receiver;
                 startActivity(it);
             }
         });
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,2);
+
+            }
+        });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,25 +254,121 @@ MyBroadcastReceiver receiver;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {//是否选择，没选择就不会继续
-           Uri uri = data.getData(); // 获取用户选择文件的URI
-            String[] proj = {MediaStore.Images.Media.DATA};
-            //好像是android多媒体数据库的封装接口，具体的看Android文档
-            @SuppressWarnings("deprecation")
-            Cursor cursor = managedQuery(uri, proj, null, null, null);
-            //按我个人理解 这个是获得用户选择的图片的索引值
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            //将光标移至开头 ，这个很重要，不小心很容易引起越界
-            cursor.moveToFirst();
-            //最后根据索引值获取图片路径
-            String path = cursor.getString(column_index);
-           // SharedPreferences.Editor editor=sharedPreferences.edit();
+        Log.e("TAG",requestCode+"======================>");
+
+          if(requestCode==2&&data!=null)
+          {
+              Uri uri = data.getData(); // 获取用户选择文件的URI
+              String[] proj = {MediaStore.Images.Media.DATA};
+              //好像是android多媒体数据库的封装接口，具体的看Android文档
+              @SuppressWarnings("deprecation")
+              Cursor cursor = managedQuery(uri, proj, null, null, null);
+              //按我个人理解 这个是获得用户选择的图片的索引值
+              int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+              //将光标移至开头 ，这个很重要，不小心很容易引起越界
+              cursor.moveToFirst();
+              //最后根据索引值获取图片路径
+              String path = cursor.getString(column_index);
+              dialog(getLocalBitmap(path));
+
+          }else
+              if (resultCode == Activity.RESULT_OK) {//是否选择，没选择就不会继续
+              Uri uri = data.getData(); // 获取用户选择文件的URI
+              String[] proj = {MediaStore.Images.Media.DATA};
+              //好像是android多媒体数据库的封装接口，具体的看Android文档
+              @SuppressWarnings("deprecation")
+              Cursor cursor = managedQuery(uri, proj, null, null, null);
+              //按我个人理解 这个是获得用户选择的图片的索引值
+              int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+              //将光标移至开头 ，这个很重要，不小心很容易引起越界
+              cursor.moveToFirst();
+              //最后根据索引值获取图片路径
+              String path = cursor.getString(column_index);
+              Log.e("TAG","================>"+path);
+              // SharedPreferences.Editor editor=sharedPreferences.edit();
 //            editor.putString("path",path);
 //            editor.commit();
-            mVideoWallpaper.setToWallPaper(this,path);
-            System.out.println(path);
+              mVideoWallpaper.setToWallPaper(this,path);
+          }
+    }
+
+    protected void dialog( Bitmap bitmap) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout = inflater.inflate(R.layout.ptcview, null);
+        ImageView imageView =layout.findViewById(R.id.imageView);//注意这一句
+        imageView.setImageBitmap(ImgUtil.createPencli(bitmap));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("title");
+        builder.setView(layout);
+        builder.setMessage("确定要退出吗?");
+        builder.setTitle("提示");
+        builder.setView(layout);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setPositiveButton("下载",
+                new android.content.DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            saveBitmap(ImgUtil.createPencli(bitmap));
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.i("error",ex.getMessage());
+                        }
+                    }
+                });
+        builder.setNegativeButton("关闭",
+                new android.content.DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
+
+    private Bitmap getLocalBitmap(String path) {
+        Bitmap bitmap = null;
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            bitmap = BitmapFactory.decodeStream(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+            /* try catch  可以解决OOM后出现的崩溃，然后采取相应的解决措施，如缩小图片，较少内存使用
+             * 但这不是解决OOM的根本方法，因为这个地方是压缩骆驼的最后一颗稻草，
+             * 解决方法是dump内存，找到内存异常原因。*/
+        } catch (OutOfMemoryError error) {
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+                bitmap = null;
+            }
+            System.gc();
+        }
+        return bitmap;
+    }
+
+    /** 保存方法 */
+    public void saveBitmap(Bitmap bm) {
+        File f = new File("/sdcard/", "sketch.png");
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+            Toast.makeText(MainActivity.this,"已保存到根目录",Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
+
     /**
      * 弹出对话框
      */
@@ -453,11 +568,27 @@ MyBroadcastReceiver receiver;
                         code = jsonObject.getString("code");
                         appurl=jsonObject.getString("url");
                         body=jsonObject.getString("update");
-                        if(!code.trim().equals(getVersionName().trim()))
-                        {
-                            Log.e("VVV",code+"   "+getVersionName());
-                            showUpdataDialog();
-                        }
+
+                        //这儿是耗时操作，完成之后更新UI；
+                        runOnUiThread(new Runnable(){
+
+                            @Override
+                            public void run() {
+                                try {
+                                    if(!code.trim().equals(getVersionName().trim()))
+                                    {
+                                        Log.e("VVV",code+"   "+getVersionName());
+                                        showUpdataDialog();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        });
+
+
+
                     }
                 } catch(Exception e){
                     e.printStackTrace();
